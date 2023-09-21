@@ -9,7 +9,7 @@ namespace WebAPICharacter.Controllers
         private static List<Character> characters = new List<Character>
         {
             new Character(),
-            new Character { Name = "Sam" }
+            new Character { Id = 1, Name = "Sam" }
         };
 
         [HttpGet("GetAll")]
@@ -19,9 +19,9 @@ namespace WebAPICharacter.Controllers
         }
 
         [HttpGet("GetSingle")]
-        public ActionResult<Character> GetSingle()
+        public ActionResult<Character> GetSingle(int id)
         {
-            return Ok(characters[0]);
+            return Ok(characters.FirstOrDefault(c=>c.Id == id));
         }
     }
 }
