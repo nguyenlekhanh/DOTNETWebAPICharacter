@@ -23,5 +23,12 @@ namespace WebAPICharacter.Controllers
         {
             return Ok(characters.FirstOrDefault(c=>c.Id == id));
         }
+
+        [HttpPost("AddCharacter")]
+        public ActionResult<List<Character>> AddCharacter(Character newCharacter)
+        {
+            characters.Add(newCharacter);
+            return Ok(characters);
+        }
     }
 }
