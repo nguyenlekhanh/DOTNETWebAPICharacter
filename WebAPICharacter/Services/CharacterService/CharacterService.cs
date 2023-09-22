@@ -25,6 +25,33 @@ namespace WebAPICharacter.Services.CharacterService
             return serviceRepsonse;
         }
 
+        public async Task<ServiceResponse<List<GetCharacterDto>>> DeleteCharacter(int id)
+        {
+            var serviceResponse = new ServiceResponse<List<GetCharacterDto>>();
+
+            try
+            {
+                var character = characters.FirstOrDefault(c => c.Id == id);
+
+                if (character is null)
+                {
+                    throw new Exception($"Character with Id '{id}' not found");
+                }
+
+                characters.Remove(character);
+
+                serviceResponse.Data = characters.Select(c => _mapper.Map<GetCharacterDto>(c)).ToList();
+
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+            return serviceResponse;
+            throw new NotImplementedException();
+        }
+
         public async Task<ServiceResponse<List<GetCharacterDto>>> GetAllCharacters()
         {
             var serviceRepsonse = new ServiceResponse<List<GetCharacterDto>>();
