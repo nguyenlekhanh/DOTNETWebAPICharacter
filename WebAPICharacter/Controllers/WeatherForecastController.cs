@@ -19,7 +19,7 @@ namespace WebAPICharacter.Controllers
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetWeatherForecast"), Authorize]  //AllowAnonymous if [Authorize] in the top controller
+        [HttpGet(Name = "GetWeatherForecast"), Authorize(Roles = "Admin")]  //AllowAnonymous if [Authorize] in the top controller
         public IEnumerable<WeatherForecast> Get()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
